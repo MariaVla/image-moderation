@@ -23,33 +23,34 @@ function App() {
     setInput(event.target.value);
   };
 
-  // const onDetectSubmit = () => {
-  //   console.log('Submit');
-  //   setImageUrl(input);
-  //   app.models
-  //     .predict(Clarifai.MODERATION_MODEL, imageUrl)
-  //     .then((response) => {
-  //       console.log(response);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
   const onDetectSubmit = () => {
-    console.log('Submit');
     setImageUrl(input);
-    console.log('-->', input);
     app.models
-      .initModel({
-        id: Clarifai.MODERATION_MODEL,
-      })
-      .then((faceDetectModel) => {
-        return faceDetectModel.predict(input);
-      })
+      .predict(Clarifai.MODERATION_MODEL, input)
       .then((response) => {
         console.log(response);
+        console.log(response.outputs[0].data.concepts[0].name);
+        console.log(`${response.outputs[0].data.concepts[0].value * 100}%`);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
+
+  // // This also works
+  // const onDetectSubmit = () => {
+  //   setImageUrl(input);
+  //   app.models
+  //     .initModel({
+  //       id: Clarifai.MODERATION_MODEL,
+  //     })
+  //     .then((faceDetectModel) => {
+  //       return faceDetectModel.predict(input);
+  //     })
+  //     .then((response) => {
+  //       console.log(response);
+  //     });
+  // };
 
   return (
     <div className='App'>
