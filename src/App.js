@@ -23,23 +23,31 @@ function App() {
     setInput(event.target.value);
   };
 
+  // const onDetectSubmit = () => {
+  //   console.log('Submit');
+  //   setImageUrl(input);
+  //   app.models
+  //     .predict(Clarifai.MODERATION_MODEL, imageUrl)
+  //     .then((response) => {
+  //       console.log(response);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
   const onDetectSubmit = () => {
     console.log('Submit');
     setImageUrl(input);
+    console.log('-->', input);
     app.models
       .initModel({
         id: Clarifai.MODERATION_MODEL,
-        // version: 'aa7f35c01e0642fda5cf400f543e7c40',
       })
-
-      .then((generalModel) => {
-        console.log(generalModel);
-        return generalModel.predict('@@sampleTrain');
+      .then((faceDetectModel) => {
+        return faceDetectModel.predict(input);
       })
-
       .then((response) => {
         console.log(response);
-        var concepts = response['outputs'][0]['data']['concepts'];
       });
   };
 
