@@ -1,4 +1,4 @@
-const ImageLinkForm = ({ onInputChange }) => {
+const ImageLinkForm = ({ onInputChange, onDetectSubmit }) => {
   return (
     <div>
       <p className='App-intro f3'>
@@ -14,7 +14,10 @@ const ImageLinkForm = ({ onInputChange }) => {
             type='text'
             onChange={onInputChange}
           />
-          <button className='grow f4 link pv2 ph3 pv2 w-30  dib white bg-light-purple cursor'>
+          <button
+            className='grow f4 link pv2 ph3 pv2 w-30  dib white bg-light-purple cursor'
+            onClick={onDetectSubmit}
+          >
             Detect
           </button>
         </div>
