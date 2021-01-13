@@ -15,6 +15,7 @@ const ImageLinkForm = ({
         <div className='pattern pa4 br3 shadow-5'>
           <button
             className='grow f4 link pv2 ph3 pv2 w-30  dib white bg-light-blue cursor'
+            type='button'
             onClick={onDetectFaceSubmit}
           >
             Detect
@@ -26,6 +27,7 @@ const ImageLinkForm = ({
           />
           <button
             className='grow f4 link pv2 ph3 pv2 w-30  dib white bg-light-purple cursor'
+            type='button'
             onClick={onModerationSubmit}
           >
             Evaluate

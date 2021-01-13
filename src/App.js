@@ -7,6 +7,7 @@ import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm';
 import UserRank from './components/UserRank.js';
 import SignInForm from './components/SignInForm';
+import Registration from './components/Registration';
 
 import './App.css';
 
@@ -95,11 +96,9 @@ function App() {
 
   return (
     <div className='App'>
-      <Navigation onRouteChange={onRouteChange} />
+      <Navigation isSignedIn={isSignedIn} onRouteChange={onRouteChange} />
 
-      {route === 'signin' ? (
-        <SignInForm onRouteChange={onRouteChange} />
-      ) : (
+      {isSignedIn || route === 'home' ? (
         <>
           <Logo />
           <UserRank />
@@ -110,6 +109,10 @@ function App() {
           />
           <ImageModeration box={box} imageUrl={imageUrl} />
         </>
+      ) : route === 'signin' || route === 'signout' ? (
+        <SignInForm onRouteChange={onRouteChange} />
+      ) : (
+        <Registration onRouteChange={onRouteChange} />
       )}
     </div>
   );
