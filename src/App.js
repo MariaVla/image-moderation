@@ -23,6 +23,13 @@ function App() {
     setInput(event.target.value);
   };
 
+  // Clarifai.MODERATION_MODEL defaults to the last onemptied,
+  // if one day it fails try replacing Clarifai.MODERATION_MODEL
+  // with this modelId
+  // Clarifai.MODERATION_MODEL that I know it works:
+  // modelId = 'd16f390eb32cad478c7ae150069bd2c6';
+  // versionId = 'aa8be956dbaa4b7a858826a84253cab9';
+
   const onDetectSubmit = () => {
     setImageUrl(input);
     app.models
