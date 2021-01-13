@@ -6,6 +6,8 @@ import ImageModeration from './components/ImageModeration';
 import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm';
 import UserRank from './components/UserRank.js';
+import SignInForm from './components/SignInForm';
+
 import './App.css';
 
 const app = new Clarifai.App({
@@ -82,17 +84,33 @@ function App() {
       .catch((error) => console.log(error));
   };
 
+  const onRouteChange = (route) => {
+    if (route === 'signout') {
+      setIsSignedIn(false);
+    } else if (route === 'home') {
+      setIsSignedIn(true);
+    }
+    setRoute(route);
+  };
+
   return (
     <div className='App'>
-      <Navigation />
-      <Logo />
-      <UserRank />
-      <ImageLinkForm
-        onInputChange={onInputChange}
-        onModerationSubmit={onModerationSubmit}
-        onDetectFaceSubmit={onDetectFaceSubmit}
-      />
-      <ImageModeration box={box} imageUrl={imageUrl} />
+      <Navigation onRouteChange={onRouteChange} />
+
+      {route === 'signin' ? (
+        <SignInForm onRouteChange={onRouteChange} />
+      ) : (
+        <>
+          <Logo />
+          <UserRank />
+          <ImageLinkForm
+            onInputChange={onInputChange}
+            onModerationSubmit={onModerationSubmit}
+            onDetectFaceSubmit={onDetectFaceSubmit}
+          />
+          <ImageModeration box={box} imageUrl={imageUrl} />
+        </>
+      )}
     </div>
   );
 }
