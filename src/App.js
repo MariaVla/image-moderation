@@ -19,6 +19,24 @@ function App() {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [route, setRoute] = useState('signin');
 
+  const displayFaceBox = (box) => {
+    setBox(box);
+  };
+
+  const calculateFaceLocation = (data) => {
+    const clarifaiFace =
+      data.outputs[0].data.regions[0].region_info.bounding_box;
+    const image = document.getElementById('image');
+    const width = Number(image.width);
+    const height = Number(image.height);
+    return {
+      x: clarifaiFace.left_col * width,
+      y: clarifaiFace.top_row * height,
+      w: width - clarifaiFace.right_col * width,
+      h: height - clarifaiFace.bottom_row * height,
+    };
+  };
+
   const onInputChange = (event) => {
     setInput(event.target.value);
   };
@@ -30,7 +48,7 @@ function App() {
   // modelId = 'd16f390eb32cad478c7ae150069bd2c6';
   // versionId = 'aa8be956dbaa4b7a858826a84253cab9';
 
-  const onDetectSubmit = () => {
+  const onModerationSubmit = () => {
     setImageUrl(input);
     app.models
       .predict(Clarifai.MODERATION_MODEL, input)
@@ -39,25 +57,30 @@ function App() {
         console.log(response.outputs[0].data.concepts[0].name);
         console.log(`${response.outputs[0].data.concepts[0].value * 100}%`);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => console.log(error));
   };
 
-  // // This also works
-  // const onDetectSubmit = () => {
-  //   setImageUrl(input);
-  //   app.models
-  //     .initModel({
-  //       id: Clarifai.MODERATION_MODEL,
-  //     })
-  //     .then((faceDetectModel) => {
-  //       return faceDetectModel.predict(input);
-  //     })
-  //     .then((response) => {
-  //       console.log(response);
-  //     });
-  // };
+  // Clarifai.FACE_DETECT_MODEL defaults to the last onemptied,
+  // if one day it fails try replacing Clarifai.MODERATION_MODEL
+  // with this modelId
+  // Clarifai.FACE_DETECT_MODEL that I know it works:
+  // modelId = "a403429f2ddf4b49b307e318f00e528b";
+  // versionId = "34ce21a40cc24b6b96ffee54aabff139";
+  const onDetectFaceSubmit = () => {
+    setImageUrl(input);
+    app.models
+      .initModel({
+        id: Clarifai.FACE_DETECT_MODEL,
+      })
+      .then((faceDetectModel) => {
+        return faceDetectModel.predict(input);
+      })
+      .then((response) => {
+        console.log(response);
+        displayFaceBox(calculateFaceLocation(response));
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div className='App'>
@@ -66,7 +89,8 @@ function App() {
       <UserRank />
       <ImageLinkForm
         onInputChange={onInputChange}
-        onDetectSubmit={onDetectSubmit}
+        onModerationSubmit={onModerationSubmit}
+        onDetectFaceSubmit={onDetectFaceSubmit}
       />
       <ImageModeration box={box} imageUrl={imageUrl} />
     </div>

@@ -1,4 +1,8 @@
-const ImageLinkForm = ({ onInputChange, onDetectSubmit }) => {
+const ImageLinkForm = ({
+  onInputChange,
+  onModerationSubmit,
+  onDetectFaceSubmit,
+}) => {
   return (
     <div>
       <p className='App-intro f3'>
@@ -9,6 +13,12 @@ const ImageLinkForm = ({ onInputChange, onDetectSubmit }) => {
       </p>
       <div className='center'>
         <div className='pattern pa4 br3 shadow-5'>
+          <button
+            className='grow f4 link pv2 ph3 pv2 w-30  dib white bg-light-blue cursor'
+            onClick={onDetectFaceSubmit}
+          >
+            Detect
+          </button>
           <input
             className=' f4 pa2 w-70 center'
             type='text'
@@ -16,9 +26,9 @@ const ImageLinkForm = ({ onInputChange, onDetectSubmit }) => {
           />
           <button
             className='grow f4 link pv2 ph3 pv2 w-30  dib white bg-light-purple cursor'
-            onClick={onDetectSubmit}
+            onClick={onModerationSubmit}
           >
-            Detect
+            Evaluate
           </button>
         </div>
       </div>
