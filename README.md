@@ -7,6 +7,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Tachyons for css styles
 - React Tilt to animate the logo
 
+## Dependencies
+
+- Node 14.5.0
+- Npm 6.14.11
+- React 17
+
 ## Available Scripts
 
 In the project directory, you can run:
