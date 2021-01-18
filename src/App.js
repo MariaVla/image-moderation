@@ -6,8 +6,8 @@ import ImageModeration from './components/ImageModeration';
 import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm';
 import UserRank from './components/UserRank.js';
-import SignInForm from './components/SignInForm';
-import Registration from './components/Registration';
+import SignIn from './components/SignIn';
+import Register from './components/Register';
 
 import './App.css';
 
@@ -21,6 +21,23 @@ function App() {
   const [box, setBox] = useState({});
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [route, setRoute] = useState('signin');
+  const [user, setUser] = useState({
+    id: '',
+    name: '',
+    email: '',
+    entries: 0,
+    joined: '',
+  });
+
+  const loadUser = (data) => {
+    setUser({
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      entries: data.entries,
+      joined: data.joined,
+    });
+  };
 
   const displayFaceBox = (box) => {
     setBox(box);
@@ -110,9 +127,9 @@ function App() {
           <ImageModeration box={box} imageUrl={imageUrl} />
         </>
       ) : route === 'signin' || route === 'signout' ? (
-        <SignInForm onRouteChange={onRouteChange} />
+        <SignIn loadUser={loadUser} onRouteChange={onRouteChange} />
       ) : (
-        <Registration onRouteChange={onRouteChange} />
+        <Register loadUser={loadUser} onRouteChange={onRouteChange} />
       )}
     </div>
   );
