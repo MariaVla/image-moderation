@@ -5,7 +5,7 @@ import Navigation from './components/Navigation';
 import ImageModeration from './components/ImageModeration';
 import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm';
-import UserRank from './components/UserRank.js';
+import Rank from './components/Rank.js';
 import SignIn from './components/SignIn';
 import Register from './components/Register';
 
@@ -97,6 +97,20 @@ function App() {
       })
       .then((response) => {
         console.log(response);
+        if (response) {
+          fetch('http://localhost:3000/image', {
+            method: 'put',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              id: user.id,
+            }),
+          })
+            .then((response) => response.json())
+            .then((count) => {
+              setUser(Object.assign(user, { entries: count }));
+              // this.setState(Object.assign(this.state.user, { entries: count }));
+            });
+        }
         displayFaceBox(calculateFaceLocation(response));
       })
       .catch((error) => console.log(error));
@@ -118,7 +132,7 @@ function App() {
       {isSignedIn || route === 'home' ? (
         <>
           <Logo />
-          <UserRank />
+          <Rank name={user.name} entries={user.entries} />
           <ImageLinkForm
             onInputChange={onInputChange}
             onModerationSubmit={onModerationSubmit}
