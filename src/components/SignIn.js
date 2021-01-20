@@ -5,10 +5,10 @@ const SignIn = ({ loadUser, onRouteChange }) => {
   const [signInPassword, setSignInPassword] = useState('');
 
   const onEmailChange = (event) => setSignInEmail(event.target.value);
-
   const onPasswordChange = (event) => setSignInPassword(event.target.value);
 
-  const onSubmitSignIn = () => {
+  const onSubmitSignIn = (e) => {
+    e.preventDefault();
     fetch('http://localhost:3000/signin', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },

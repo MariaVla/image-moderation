@@ -44,6 +44,8 @@ function App() {
   };
 
   const calculateFaceLocation = (data) => {
+    if (data.outputs[0].data.regions === undefined) return;
+
     const clarifaiFace =
       data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('image');
@@ -96,7 +98,6 @@ function App() {
         return faceDetectModel.predict(input);
       })
       .then((response) => {
-        console.log(response);
         if (response) {
           fetch('http://localhost:3000/image', {
             method: 'put',
