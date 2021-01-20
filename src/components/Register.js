@@ -9,7 +9,8 @@ const Register = ({ loadUser, onRouteChange }) => {
   const onEmailChange = (event) => setEmail(event.target.value);
   const onPasswordChange = (event) => setPassword(event.target.value);
 
-  const onSubmitRegister = () => {
+  const onSubmitRegister = (e) => {
+    e.preventDefault();
     fetch('http://localhost:3000/register', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
@@ -72,12 +73,13 @@ const Register = ({ loadUser, onRouteChange }) => {
             </div>
           </fieldset>
           <div className=''>
-            <input
+            <button
               className='f2 b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib'
               type='submit'
-              value='Sign in'
               onClick={onSubmitRegister}
-            />
+            >
+              Register
+            </button>
           </div>
         </form>
       </main>
