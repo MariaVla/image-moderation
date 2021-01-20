@@ -78,6 +78,19 @@ function App() {
         console.log(response);
         console.log(response.outputs[0].data.concepts[0].name);
         console.log(`${response.outputs[0].data.concepts[0].value * 100}%`);
+        if (response) {
+          fetch('http://localhost:3000/image', {
+            method: 'put',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              id: user.id,
+            }),
+          })
+            .then((response) => response.json())
+            .then((count) => {
+              setUser({ ...user, entries: count });
+            });
+        }
       })
       .catch((error) => console.log(error));
   };
@@ -108,8 +121,7 @@ function App() {
           })
             .then((response) => response.json())
             .then((count) => {
-              setUser(Object.assign(user, { entries: count }));
-              // this.setState(Object.assign(this.state.user, { entries: count }));
+              setUser({ ...user, entries: count });
             });
         }
         displayFaceBox(calculateFaceLocation(response));
