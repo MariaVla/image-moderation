@@ -129,9 +129,24 @@ function App() {
       .catch((error) => console.log(error));
   };
 
+  function resetState() {
+    setInput('');
+    setImageUrl('');
+    setBox({});
+    setIsSignedIn(false);
+    setRoute('signin');
+    setUser({
+      id: '',
+      name: '',
+      email: '',
+      entries: 0,
+      joined: '',
+    });
+  }
+
   const onRouteChange = (route) => {
     if (route === 'signout') {
-      setIsSignedIn(false);
+      resetState();
     } else if (route === 'home') {
       setIsSignedIn(true);
     }
