@@ -9,7 +9,7 @@ const SignIn = ({ loadUser, onRouteChange }) => {
 
   const onSubmitSignIn = (e) => {
     e.preventDefault();
-    fetch('http://localhost:3000/signin', {
+    fetch('https://moderation-app-backend.herokuapp.com/signin', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

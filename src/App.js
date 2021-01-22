@@ -59,7 +59,7 @@ function App() {
 
   const onModerationSubmit = () => {
     setImageUrl(input);
-    fetch('http://localhost:3000/imageurl', {
+    fetch('https://moderation-app-backend.herokuapp.com/imageurl', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -72,7 +72,7 @@ function App() {
         console.log(response.outputs[0].data.concepts[0].name);
         console.log(`${response.outputs[0].data.concepts[0].value * 100}%`);
         if (response) {
-          fetch('http://localhost:3000/image', {
+          fetch('https://moderation-app-backend.herokuapp.com/image', {
             method: 'put',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -91,7 +91,7 @@ function App() {
 
   const onDetectFaceSubmit = () => {
     setImageUrl(input);
-    fetch('http://localhost:3000/imageurlfacedetect', {
+    fetch('https://moderation-app-backend.herokuapp.com/imageurlfacedetect', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -101,7 +101,7 @@ function App() {
       .then((response) => response.json())
       .then((response) => {
         if (response) {
-          fetch('http://localhost:3000/image', {
+          fetch('https://moderation-app-backend.herokuapp.com/image', {
             method: 'put',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
