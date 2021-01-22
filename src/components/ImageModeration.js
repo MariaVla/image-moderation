@@ -7,7 +7,7 @@ const ImageModeration = ({ imageUrl, box }) => {
           src={imageUrl}
           width='500px'
           height='auto'
-          alt='Image added by user'
+          alt='Added by user'
         />
         {box && (
           <div
