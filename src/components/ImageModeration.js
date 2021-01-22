@@ -2,7 +2,13 @@ const ImageModeration = ({ imageUrl, box }) => {
   return (
     <div className='center ma'>
       <div className='container mt2'>
-        <img id='image' src={imageUrl} width='500px' height='auto' />
+        <img
+          id='image'
+          src={imageUrl}
+          width='500px'
+          height='auto'
+          alt='Image added by user'
+        />
         {box && (
           <div
             className='bounding-box'
