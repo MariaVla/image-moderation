@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import Clarifai from 'clarifai';
-
 import Navigation from './components/Navigation';
 import ImageModeration from './components/ImageModeration';
 import Logo from './components/Logo/Logo';
@@ -10,10 +8,6 @@ import SignIn from './components/SignIn';
 import Register from './components/Register';
 
 import './App.css';
-
-const app = new Clarifai.App({
-  apiKey: '',
-});
 
 function App() {
   const [input, setInput] = useState('');
@@ -72,8 +66,14 @@ function App() {
 
   const onModerationSubmit = () => {
     setImageUrl(input);
-    app.models
-      .predict(Clarifai.MODERATION_MODEL, input)
+    fetch('http://localhost:3000/imageurl', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        input,
+      }),
+    })
+      .then((response) => response.json())
       .then((response) => {
         console.log(response);
         console.log(response.outputs[0].data.concepts[0].name);
