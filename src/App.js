@@ -57,13 +57,6 @@ function App() {
     setInput(event.target.value);
   };
 
-  // Clarifai.MODERATION_MODEL defaults to the last onemptied,
-  // if one day it fails try replacing Clarifai.MODERATION_MODEL
-  // with this modelId
-  // Clarifai.MODERATION_MODEL that I know it works:
-  // modelId = 'd16f390eb32cad478c7ae150069bd2c6';
-  // versionId = 'aa8be956dbaa4b7a858826a84253cab9';
-
   const onModerationSubmit = () => {
     setImageUrl(input);
     fetch('http://localhost:3000/imageurl', {
@@ -96,21 +89,16 @@ function App() {
       .catch((error) => console.log(error));
   };
 
-  // Clarifai.FACE_DETECT_MODEL defaults to the last onemptied,
-  // if one day it fails try replacing Clarifai.MODERATION_MODEL
-  // with this modelId
-  // Clarifai.FACE_DETECT_MODEL that I know it works:
-  // modelId = "a403429f2ddf4b49b307e318f00e528b";
-  // versionId = "34ce21a40cc24b6b96ffee54aabff139";
   const onDetectFaceSubmit = () => {
     setImageUrl(input);
-    app.models
-      .initModel({
-        id: Clarifai.FACE_DETECT_MODEL,
-      })
-      .then((faceDetectModel) => {
-        return faceDetectModel.predict(input);
-      })
+    fetch('http://localhost:3000/imageurlfacedetect', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        input,
+      }),
+    })
+      .then((response) => response.json())
       .then((response) => {
         if (response) {
           fetch('http://localhost:3000/image', {
