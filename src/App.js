@@ -58,6 +58,9 @@ function App() {
   };
 
   const onModerationSubmit = () => {
+    if (input === '') {
+      return;
+    }
     setImageUrl(input);
     fetch('https://moderation-app-backend.herokuapp.com/imageurl', {
       method: 'post',
@@ -87,6 +90,9 @@ function App() {
   };
 
   const onDetectFaceSubmit = () => {
+    if (input === '') {
+      return;
+    }
     setImageUrl(input);
     fetch('https://moderation-app-backend.herokuapp.com/imageurlfacedetect', {
       method: 'post',
