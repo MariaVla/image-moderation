@@ -4,8 +4,8 @@ const ImageModeration = ({ imageUrl, box }) => {
       <div className='container mt2'>
         <img
           id='image'
-          src={imageUrl || `https://via.placeholder.com/400`}
-          width='400px'
+          src={imageUrl || `https://via.placeholder.com/250`}
+          width='250px'
           height='auto'
           alt='Added by user'
         />
