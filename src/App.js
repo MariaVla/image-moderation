@@ -118,6 +118,7 @@ function App() {
     setInput('');
     setImageUrl('');
     setBox({});
+    setModerationResult('');
     setIsSignedIn(false);
     setRoute('signin');
     setUser({
