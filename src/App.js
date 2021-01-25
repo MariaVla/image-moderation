@@ -12,6 +12,7 @@ function App() {
   const [input, setInput] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [box, setBox] = useState({});
+  const [moderationResult, setModerationResult] = useState('');
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [route, setRoute] = useState('signin');
   const [user, setUser] = useState({
@@ -71,6 +72,8 @@ function App() {
         console.log(response.outputs[0].data.concepts[0].name);
         console.log(`${response.outputs[0].data.concepts[0].value * 100}%`);
         if (response) {
+          setModerationResult(response.outputs[0].data.concepts[0]);
+
           fetch('https://moderation-app-backend.herokuapp.com/image', {
             method: 'put',
             headers: { 'Content-Type': 'application/json' },
@@ -153,7 +156,11 @@ function App() {
             onModerationSubmit={onModerationSubmit}
             onDetectFaceSubmit={onDetectFaceSubmit}
           />
-          <ImageModeration box={box} imageUrl={imageUrl} />
+          <ImageModeration
+            box={box}
+            imageUrl={imageUrl}
+            moderationResult={moderationResult}
+          />
         </>
       ) : route === 'signin' || route === 'signout' ? (
         <SignIn loadUser={loadUser} onRouteChange={onRouteChange} />
