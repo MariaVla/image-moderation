@@ -84,9 +84,11 @@ function App() {
             .then((response) => response.json())
             .then((count) => {
               setUser({ ...user, entries: count });
-            });
+            })
+            .catch((error) => console.log(error));
         }
-      });
+      })
+      .catch((error) => console.log(error));
   };
 
   const onDetectFaceSubmit = () => {
@@ -114,10 +116,12 @@ function App() {
             .then((response) => response.json())
             .then((count) => {
               setUser({ ...user, entries: count });
-            });
+            })
+            .catch((error) => console.log(error));
         }
         displayFaceBox(calculateFaceLocation(response));
-      });
+      })
+      .catch((error) => console.log(error));
   };
 
   function resetState() {
