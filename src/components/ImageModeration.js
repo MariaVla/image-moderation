@@ -4,11 +4,12 @@ const ImageModeration = ({ imageUrl, box }) => {
       <div className='container mt2'>
         <img
           id='image'
-          src={imageUrl}
-          width='500px'
+          src={imageUrl || `https://via.placeholder.com/400`}
+          width='400px'
           height='auto'
           alt='Added by user'
         />
+
         {box && (
           <div
             className='bounding-box'
