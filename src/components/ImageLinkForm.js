@@ -20,9 +20,10 @@ const ImageLinkForm = ({
             Detect
           </button>
           <input
-            className=' f4 pa2 w-70 center'
+            className='f4 pa2 w-70 center'
             type='text'
             onChange={onInputChange}
+            placeholder={'Paste image url...'}
           />
           <button
             className='grow f5 link pv2 ph3 pv2 w-30 dib white bg-light-purple cursor'
