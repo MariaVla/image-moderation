@@ -5,11 +5,10 @@ const ImageLinkForm = ({
 }) => {
   return (
     <div>
-      <p className='App-intro f3'>
+      <p className='App-intro f5 ph6'>
         {
           'This model returns probability scores on the likelihood that an image contains concepts such as gore, drugs, explicit nudity, or suggestive nudity. It also returns the probability that the image is “safe,” meaning it does not contain the aforementioned four moderation categories.'
         }
-        {'This Magic Brain will detect faces in your pictures. Give it a try.'}
       </p>
       <div className='center'>
         <div className='pattern pa4 br3 shadow-5'>
