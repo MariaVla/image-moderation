@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Navigation from './components/Navigation';
 import ImageModeration from './components/ImageModeration';
-import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm';
 import Rank from './components/Rank.js';
 import SignIn from './components/SignIn';
@@ -148,7 +147,6 @@ function App() {
 
       {isSignedIn || route === 'home' ? (
         <>
-          <Logo />
           <Rank name={user.name} entries={user.entries} />
           <ImageLinkForm
             onInputChange={onInputChange}
