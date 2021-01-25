@@ -68,9 +68,6 @@ function App() {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
-        console.log(response.outputs[0].data.concepts[0].name);
-        console.log(`${response.outputs[0].data.concepts[0].value * 100}%`);
         if (response) {
           setModerationResult(response.outputs[0].data.concepts[0]);
 
@@ -84,11 +81,9 @@ function App() {
             .then((response) => response.json())
             .then((count) => {
               setUser({ ...user, entries: count });
-            })
-            .catch((error) => console.log(error));
+            });
         }
-      })
-      .catch((error) => console.log(error));
+      });
   };
 
   const onDetectFaceSubmit = () => {
@@ -116,8 +111,7 @@ function App() {
             });
         }
         displayFaceBox(calculateFaceLocation(response));
-      })
-      .catch((error) => console.log(error));
+      });
   };
 
   function resetState() {
