@@ -20,3 +20,7 @@ that uses `image-moderation-api` server to login in and upload images to know if
 `$ yarn install`
 
 `$ yarn start`
+
+## Deploy
+
+The app lives in Vercel. Pushes to `main` will trigger a deploy.
