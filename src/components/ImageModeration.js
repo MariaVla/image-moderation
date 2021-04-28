@@ -1,4 +1,4 @@
-const ImageModeration = ({ imageUrl, box, moderationResult }) => {
+const ImageModeration = ({ imageUrl, boxes, moderationResult }) => {
   return (
     <div className='center ma'>
       <div className='container mt2'>
@@ -10,12 +10,16 @@ const ImageModeration = ({ imageUrl, box, moderationResult }) => {
           alt='Added by user'
         />
 
-        {box && (
-          <div
-            className='bounding-box'
-            style={{ top: box.y, right: box.w, bottom: box.h, left: box.x }}
-          ></div>
-        )}
+        {boxes &&
+          boxes.map((box, i) => {
+            return (
+              <div
+                key={i}
+                className='bounding-box'
+                style={{ top: box.y, right: box.w, bottom: box.h, left: box.x }}
+              ></div>
+            );
+          })}
         {moderationResult && (
           <div className='moderation-result' style={{ top: 0, left: 300 }}>
             The image is... <span>{moderationResult.name}</span> with{' '}
