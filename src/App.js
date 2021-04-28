@@ -124,7 +124,6 @@ function App() {
             })
             .catch((error) => console.log(error));
         }
-        console.log(response);
         displayFaceBoxes(calculateFaceLocations(response));
       })
       .catch((error) => console.log(error));
