@@ -11,7 +11,7 @@ import './App.css';
 function App() {
   const [input, setInput] = useState('');
   const [imageUrl, setImageUrl] = useState('');
-  const [box, setBox] = useState({});
+  const [boxes, setBoxes] = useState([]);
   const [moderationResult, setModerationResult] = useState('');
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [route, setRoute] = useState('signin');
@@ -33,24 +33,29 @@ function App() {
     });
   };
 
-  const displayFaceBox = (box) => {
-    setBox(box);
+  const displayFaceBoxes = (boxes) => {
+    setBoxes(boxes);
   };
 
-  const calculateFaceLocation = (data) => {
-    if (data.outputs[0].data.regions === undefined) return;
-
-    const clarifaiFace =
-      data.outputs[0].data.regions[0].region_info.bounding_box;
-    const image = document.getElementById('image');
-    const width = Number(image.width);
-    const height = Number(image.height);
-    return {
-      x: clarifaiFace.left_col * width,
-      y: clarifaiFace.top_row * height,
-      w: width - clarifaiFace.right_col * width,
-      h: height - clarifaiFace.bottom_row * height,
-    };
+  const calculateFaceLocations = (data) => {
+    if (
+      data.outputs === undefined ||
+      data.outputs[0].data.regions === undefined
+    ) {
+      return;
+    }
+    return data.outputs[0].data.regions.map((face) => {
+      const clarifaiFace = face.region_info.bounding_box;
+      const image = document.getElementById('image');
+      const width = Number(image.width);
+      const height = Number(image.height);
+      return {
+        x: clarifaiFace.left_col * width,
+        y: clarifaiFace.top_row * height,
+        w: width - clarifaiFace.right_col * width,
+        h: height - clarifaiFace.bottom_row * height,
+      };
+    });
   };
 
   const onInputChange = (event) => {
@@ -119,7 +124,8 @@ function App() {
             })
             .catch((error) => console.log(error));
         }
-        displayFaceBox(calculateFaceLocation(response));
+        console.log(response);
+        displayFaceBoxes(calculateFaceLocations(response));
       })
       .catch((error) => console.log(error));
   };
@@ -127,7 +133,7 @@ function App() {
   function resetState() {
     setInput('');
     setImageUrl('');
-    setBox({});
+    setBoxes([]);
     setModerationResult('');
     setIsSignedIn(false);
     setRoute('signin');
@@ -162,7 +168,7 @@ function App() {
             onDetectFaceSubmit={onDetectFaceSubmit}
           />
           <ImageModeration
-            box={box}
+            boxes={boxes}
             imageUrl={imageUrl}
             moderationResult={moderationResult}
           />
