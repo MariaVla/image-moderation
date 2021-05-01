@@ -1,16 +1,12 @@
 import Logo from './Logo/Logo';
+import ProfileIcon from './Profile/ProfileIcon';
 
-const Navigation = ({ isSignedIn, onRouteChange }) => {
+const Navigation = ({ isSignedIn, onRouteChange, toggleModal }) => {
   if (isSignedIn) {
     return (
       <nav style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Logo />
-        <p
-          className='f3 link dim black underline pa3 pointer'
-          onClick={() => onRouteChange('signout')}
-        >
-          Sign Out
-        </p>
+        <ProfileIcon onRouteChange={onRouteChange} toggleModal={toggleModal} />
       </nav>
     );
   }

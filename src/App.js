@@ -154,10 +154,26 @@ function App() {
     setRoute(route);
   };
 
+  const toggleModal = () => setIsProfileOpen(!isProfileOpen);
+
   return (
     <div className='App'>
-      <Navigation isSignedIn={isSignedIn} onRouteChange={onRouteChange} />
-
+      <Navigation
+        isSignedIn={isSignedIn}
+        onRouteChange={onRouteChange}
+        toggleModal={toggleModal}
+      />
+      // TODO majo
+      {/* {isProfileOpen && (
+        <Modal>
+          <Profile
+            isProfileOpen={isProfileOpen}
+            toggleModal={this.toggleModal}
+            user={user}
+            loadUser={this.loadUser}
+          />
+        </Modal>
+      )} */}
       {isSignedIn || route === 'home' ? (
         <>
           <Rank name={user.name} entries={user.entries} />
