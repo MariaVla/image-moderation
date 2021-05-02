@@ -3,8 +3,10 @@ import Navigation from './components/Navigation';
 import ImageModeration from './components/ImageModeration';
 import ImageLinkForm from './components/ImageLinkForm';
 import Rank from './components/Rank.js';
-import SignIn from './components/SignIn';
-import Register from './components/Register';
+import SignIn from './components/SignIn/SignIn';
+import Register from './components/Register/Register';
+import Profile from './components/Profile/Profile';
+import Modal from './components/Modal/Modal';
 
 import './App.css';
 

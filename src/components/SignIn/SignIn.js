@@ -1,23 +1,21 @@
 import { useState } from 'react';
+import './SignIn.css';
 
-const Register = ({ loadUser, onRouteChange }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
+const SignIn = ({ loadUser, onRouteChange }) => {
+  const [signInEmail, setSignInEmail] = useState('');
+  const [signInPassword, setSignInPassword] = useState('');
 
-  const onNameChange = (event) => setName(event.target.value);
-  const onEmailChange = (event) => setEmail(event.target.value);
-  const onPasswordChange = (event) => setPassword(event.target.value);
+  const onEmailChange = (event) => setSignInEmail(event.target.value);
+  const onPasswordChange = (event) => setSignInPassword(event.target.value);
 
-  const onSubmitRegister = (e) => {
+  const onSubmitSignIn = (e) => {
     e.preventDefault();
-    fetch('https://moderation-app-backend.herokuapp.com/register', {
+    fetch('http://localhost:3001/signin', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        email: email,
-        password: password,
-        name: name,
+        email: signInEmail,
+        password: signInPassword,
       }),
     })
       .then((response) => response.json())
@@ -34,25 +32,13 @@ const Register = ({ loadUser, onRouteChange }) => {
       <main className='pa4 black-80'>
         <form className='measure'>
           <fieldset id='sign_up' className='ba b--transparent ph0 mh0'>
-            <legend className='f1 fw6 ph0 mh0'>Register</legend>
-            <div className='mt3'>
-              <label className='db fw6 lh-copy f6' htmlFor='name'>
-                Name
-              </label>
-              <input
-                className='f3 mw6 pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100'
-                type='text'
-                name='name'
-                id='name'
-                onChange={onNameChange}
-              />
-            </div>
+            <legend className='f1 fw6 ph0 mh0'>Sign In</legend>
             <div className='mt3'>
               <label className='db fw6 lh-copy f6' htmlFor='email-address'>
                 Email
               </label>
               <input
-                className='f3 mw6 pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100'
+                className='f3 mw6 pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 hover-black'
                 type='email'
                 name='email-address'
                 id='email-address'
@@ -64,7 +50,7 @@ const Register = ({ loadUser, onRouteChange }) => {
                 Password
               </label>
               <input
-                className='f3 b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100'
+                className='f3 b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 hover-black'
                 type='password'
                 name='password'
                 id='password'
@@ -76,10 +62,18 @@ const Register = ({ loadUser, onRouteChange }) => {
             <button
               className='f2 b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib'
               type='submit'
-              onClick={onSubmitRegister}
+              onClick={onSubmitSignIn}
+            >
+              Submit
+            </button>
+          </div>
+          <div className='lh-copy mt3'>
+            <p
+              className='f5 link dim black db pointer'
+              onClick={() => onRouteChange('register')}
             >
               Register
-            </button>
+            </p>
           </div>
         </form>
       </main>
@@ -87,4 +81,4 @@ const Register = ({ loadUser, onRouteChange }) => {
   );
 };
 
-export default Register;
+export default SignIn;
