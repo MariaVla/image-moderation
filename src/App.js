@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navigation from './components/Navigation';
 import ImageModeration from './components/ImageModeration';
 import ImageLinkForm from './components/ImageLinkForm';
@@ -27,6 +27,40 @@ function App() {
     pet: '',
     age: '',
   });
+
+  useEffect(() => {
+    const token = window.localStorage.getItem('token');
+    if (token) {
+      fetch('http://localhost:3001/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data && data.id) {
+            fetch(`http://localhost:3001/profile/${data.id}`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: token,
+              },
+            })
+              .then((response) => response.json())
+              .then((user) => {
+                console.log(user);
+                if (user && user.email) {
+                  loadUser(user);
+                  onRouteChange('home');
+                }
+              });
+          }
+        })
+        .catch(console.log);
+    }
+  }, []);
 
   const loadUser = (data) => {
     setUser({

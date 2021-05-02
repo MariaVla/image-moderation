@@ -8,6 +8,11 @@ const SignIn = ({ loadUser, onRouteChange }) => {
   const onEmailChange = (event) => setSignInEmail(event.target.value);
   const onPasswordChange = (event) => setSignInPassword(event.target.value);
 
+  const saveAuthTokenInSessions = (token) => {
+    // window.sessionStorage.setItem('token', token);
+    window.localStorage.setItem('token', token);
+  };
+
   const onSubmitSignIn = (e) => {
     e.preventDefault();
     fetch('http://localhost:3001/signin', {
@@ -19,9 +24,10 @@ const SignIn = ({ loadUser, onRouteChange }) => {
       }),
     })
       .then((response) => response.json())
-      .then((user) => {
-        if (user.id) {
-          loadUser(user);
+      .then((data) => {
+        if (data.success && data.user) {
+          saveAuthTokenInSessions(data.token);
+          loadUser(data.user);
           onRouteChange('home');
         }
       });
