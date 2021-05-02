@@ -16,6 +16,7 @@ function App() {
   const [boxes, setBoxes] = useState([]);
   const [moderationResult, setModerationResult] = useState('');
   const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [route, setRoute] = useState('signin');
   const [user, setUser] = useState({
     id: '',
@@ -165,17 +166,17 @@ function App() {
         onRouteChange={onRouteChange}
         toggleModal={toggleModal}
       />
-      // TODO majo
-      {/* {isProfileOpen && (
+
+      {isProfileOpen && (
         <Modal>
           <Profile
             isProfileOpen={isProfileOpen}
-            toggleModal={this.toggleModal}
+            toggleModal={toggleModal}
             user={user}
-            loadUser={this.loadUser}
+            loadUser={loadUser}
           />
         </Modal>
-      )} */}
+      )}
       {isSignedIn || route === 'home' ? (
         <>
           <Rank name={user.name} entries={user.entries} />
