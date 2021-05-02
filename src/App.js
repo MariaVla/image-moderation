@@ -24,6 +24,8 @@ function App() {
     email: '',
     entries: 0,
     joined: '',
+    pet: '',
+    age: '',
   });
 
   const loadUser = (data) => {
@@ -33,6 +35,8 @@ function App() {
       email: data.email,
       entries: data.entries,
       joined: data.joined,
+      pet: data.pet,
+      age: data.age,
     });
   };
 
@@ -145,6 +149,8 @@ function App() {
       email: '',
       entries: 0,
       joined: '',
+      pet: '',
+      age: '',
     });
   }
 

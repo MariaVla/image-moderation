@@ -7,7 +7,7 @@ function Profile(props) {
   const [pet, setPet] = useState(props.user.pet);
 
   const onProfileUpdate = (data) => {
-    fetch(`http://localhost:3000/profile/${props.user.id}`, {
+    fetch(`http://localhost:3001/profile/${props.user.id}`, {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
