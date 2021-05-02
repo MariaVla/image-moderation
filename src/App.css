@@ -52,6 +52,12 @@
   position: absolute;
 }
 
+.container.image {
+  width: auto;
+  padding-right: 0;
+  padding-left: 0;
+}
+
 .center {
   display: flex;
   justify-content: center;
