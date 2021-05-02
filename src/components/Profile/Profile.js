@@ -7,16 +7,19 @@ function Profile(props) {
   const [pet, setPet] = useState(props.user.pet);
 
   const onProfileUpdate = (data) => {
-    fetch(`http://localhost:3001/profile/${props.user.id}`, {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: window.localStorage.getItem('token'),
-      },
-      body: JSON.stringify({
-        formInput: data,
-      }),
-    })
+    fetch(
+      `https://moderation-app-backend.herokuapp.com/profile/${props.user.id}`,
+      {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: window.localStorage.getItem('token'),
+        },
+        body: JSON.stringify({
+          formInput: data,
+        }),
+      }
+    )
       .then((resp) => {
         if (resp.status === 200 || resp.status === 304) {
           props.toggleModal();

@@ -32,7 +32,7 @@ function App() {
   useEffect(() => {
     const token = window.localStorage.getItem('token');
     if (token) {
-      fetch('http://localhost:3001/signin', {
+      fetch('https://moderation-app-backend.herokuapp.com/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -42,13 +42,16 @@ function App() {
         .then((response) => response.json())
         .then((data) => {
           if (data && data.id) {
-            fetch(`http://localhost:3001/profile/${data.id}`, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: token,
-              },
-            })
+            fetch(
+              `https://moderation-app-backend.herokuapp.com/profile/${data.id}`,
+              {
+                method: 'GET',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: token,
+                },
+              }
+            )
               .then((response) => response.json())
               .then((user) => {
                 if (user && user.email) {

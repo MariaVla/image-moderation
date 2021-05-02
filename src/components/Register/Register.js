@@ -11,7 +11,7 @@ const Register = ({ loadUser, onRouteChange }) => {
 
   const onSubmitRegister = (e) => {
     e.preventDefault();
-    fetch('http://localhost:3001/register', {
+    fetch('https://moderation-app-backend.herokuapp.com/register', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
