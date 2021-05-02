@@ -50,7 +50,6 @@ function App() {
             })
               .then((response) => response.json())
               .then((user) => {
-                console.log(user);
                 if (user && user.email) {
                   loadUser(user);
                   onRouteChange('home');
@@ -75,12 +74,14 @@ function App() {
   };
 
   const displayFaceBoxes = (boxes) => {
-    setBoxes(boxes);
+    if (boxes) {
+      setBoxes(boxes);
+    }
   };
 
   const calculateFaceLocations = (data) => {
     if (
-      data.outputs === undefined ||
+      (data && data.outputs === undefined) ||
       data.outputs[0].data.regions === undefined
     ) {
       return;
@@ -104,13 +105,17 @@ function App() {
   };
 
   const onModerationSubmit = () => {
+    const token = window.localStorage.getItem('token');
     if (input === '') {
       return;
     }
     setImageUrl(input);
     fetch('https://moderation-app-backend.herokuapp.com/imageurl', {
       method: 'post',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
       body: JSON.stringify({
         input,
       }),
@@ -122,7 +127,10 @@ function App() {
 
           fetch('https://moderation-app-backend.herokuapp.com/image', {
             method: 'put',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: token,
+            },
             body: JSON.stringify({
               id: user.id,
             }),
@@ -138,13 +146,17 @@ function App() {
   };
 
   const onDetectFaceSubmit = () => {
+    const token = window.localStorage.getItem('token');
     if (input === '') {
       return;
     }
     setImageUrl(input);
     fetch('https://moderation-app-backend.herokuapp.com/imageurlfacedetect', {
       method: 'post',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
       body: JSON.stringify({
         input,
       }),
@@ -154,7 +166,10 @@ function App() {
         if (response) {
           fetch('https://moderation-app-backend.herokuapp.com/image', {
             method: 'put',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: token,
+            },
             body: JSON.stringify({
               id: user.id,
             }),
