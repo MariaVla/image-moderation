@@ -45,7 +45,12 @@ function ProfileIcon(props) {
           <DropdownItem onClick={() => props.toggleModal()}>
             View Profile
           </DropdownItem>
-          <DropdownItem onClick={() => props.onRouteChange('signout')}>
+          <DropdownItem
+            onClick={() => {
+              props.onRouteChange('signout');
+              window.localStorage.removeItem('token');
+            }}
+          >
             Sign Out
           </DropdownItem>
         </DropdownMenu>

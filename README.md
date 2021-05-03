@@ -30,4 +30,3 @@ Pull Requests will be automatically deployed with Vercel.
 ## TODO
 
 - Adjust responsive.
-- Implement Sign Out.
