@@ -1,7 +1,7 @@
 const ImageModeration = ({ imageUrl, boxes, moderationResult }) => {
   return (
     <div className='center ma'>
-      <div className='container mt2'>
+      <div className='container mt2 image'>
         <img
           id='image'
           src={imageUrl || `https://via.placeholder.com/250`}

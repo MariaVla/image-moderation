@@ -26,3 +26,7 @@ that uses `image-moderation-api` server to login in and upload images to know if
 The app lives in Vercel. Pushes to `main` will trigger a deploy.
 
 Pull Requests will be automatically deployed with Vercel.
+
+## TODO
+
+- Adjust responsive.
