@@ -63,6 +63,7 @@ function App() {
         })
         .catch(console.log);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadUser = (data) => {
